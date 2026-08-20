@@ -162,6 +162,12 @@ table tbody tr:hover { background: #fffafb; }
 }
 .hero-copy { position: relative; z-index: 1; align-self: center; padding: clamp(2rem, 5vw, 4.2rem); }
 .hero-kicker { display: inline-flex; align-items: center; gap: .45rem; color: #be123c; font-size: .75rem; line-height: 1.2; font-weight: 750; letter-spacing: .055em; text-transform: uppercase; }
+.fund-brand { display: inline-flex; flex-direction: column; gap: .18rem; line-height: 1.1; letter-spacing: normal; text-transform: none; }
+.fund-brand strong { color: inherit; font-size: 1rem; font-weight: 900; letter-spacing: .045em; }
+.fund-brand > span { display: inline-block; width: fit-content; padding: .16rem .45rem; border-left: 3px solid currentColor; border-radius: 0 .3rem .3rem 0; font-size: .7rem; font-weight: 800; line-height: 1.25; letter-spacing: .015em; }
+.fund-brand-header { color: #b91c1c; }
+.fund-brand-header > span { color: #9f1239; background: #fff1f2; }
+.fund-brand-hero > span { background: rgba(190, 24, 93, .1); }
 .hero-card h1 { margin: 1rem 0 .8rem; color: #172554; font-size: clamp(2rem, 4vw, 3.45rem); line-height: 1.08; font-weight: 800; letter-spacing: -.045em; }
 .hero-card h1 em { color: #dc2626; font-style: normal; }
 .hero-card p { max-width: 32rem; color: #475569; font-size: 1.02rem; line-height: 1.7; }
@@ -188,6 +194,10 @@ table tbody tr:hover { background: #fffafb; }
 .auth-showcase::after { position: absolute; z-index: 1; left: 9%; bottom: 18%; width: .75rem; height: .75rem; content: ''; border-radius: 999px; background: #fda4af; box-shadow: 3rem 5rem 0 #fecdd3, 8rem 1rem 0 rgba(255,255,255,.6); animation: authFloat 5s ease-in-out infinite; }
 .auth-showcase-content { position: relative; z-index: 2; max-width: 39rem; padding: clamp(2.5rem, 6vw, 5.75rem); color: #fff; }
 .auth-brand { display: inline-flex; align-items: center; gap: .6rem; color: #fecdd3; font-size: .86rem; font-weight: 800; letter-spacing: .06em; }
+.auth-brand .fund-brand strong { font-size: 1rem; color: #fff; }
+.auth-brand .fund-brand > span { color: #ffe4e6; background: rgba(255,255,255,.12); }
+.site-footer .fund-brand strong { font-size: 1rem; color: #fff; }
+.site-footer .fund-brand > span { color: #ffe4e6; background: rgba(255,255,255,.1); }
 .auth-showcase h1 { margin-top: 2.1rem; font-size: clamp(2.15rem, 4vw, 4.15rem); line-height: 1.08; font-weight: 800; letter-spacing: -.05em; }
 .auth-showcase h1 em { color: #fda4af; font-style: normal; }
 .auth-showcase-content > p { max-width: 31rem; margin-top: 1.2rem; color: #e2e8f0; font-size: 1.04rem; line-height: 1.75; }
@@ -264,6 +274,8 @@ table tbody tr:hover { background: #fffafb; }
 @media (max-width: 700px) {
   header > div { min-height: auto; padding-top: .7rem; padding-bottom: .7rem; align-items: flex-start; flex-wrap: wrap; }
   .brand-link { max-width: calc(100% - 7rem); }
+  .fund-brand-header strong { font-size: .82rem; }
+  .fund-brand-header > span { max-width: 14rem; font-size: .58rem; white-space: normal; }
   .header-vital-line { order: 3; flex-basis: 100%; height: 1.7rem; }
   .app-workspace { display: block; }
   .app-sidebar { width: 100%; padding: .7rem; border-right: 0; border-bottom: 1px solid #e2e8f0; }
