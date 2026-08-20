@@ -1,0 +1,22 @@
+# Render Blueprint cho API Express. Render sẽ tự deploy lại khi có commit mới trên nhánh đã kết nối.
+services:
+  - type: web
+    name: dkt-blood-donation-api
+    runtime: node
+    rootDir: server
+    buildCommand: npm ci && npm run build
+    startCommand: node dist/server.js
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: 22
+      # Các biến bảo mật được nhập trong bảng Environment của Render, không commit vào GitHub.
+      - key: MONGO_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: JWT_EXPIRES_IN
+        value: 7d
+      - key: CLIENT_URL
+        sync: false

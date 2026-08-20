@@ -1,7 +1,14 @@
 import axios from 'axios';
 
+/**
+ * Khi chạy local, Vite chuyển tiếp `/api` sang server localhost qua proxy.
+ * Khi deploy Vercel, đặt VITE_API_URL=https://<ten-dich-vu>.onrender.com/api
+ * để trình duyệt gọi trực tiếp API Render. Không ghi URL production cứng vào mã nguồn.
+ */
+const configuredApiUrl = import.meta.env.VITE_API_URL?.trim().replace(/\/$/, '');
+
 const api = axios.create({
-  baseURL: '/api',
+  baseURL: configuredApiUrl || '/api',
   headers: {
     'Content-Type': 'application/json',
   },

@@ -18,9 +18,26 @@ dotenv.config();
 
 const app = express();
 
+/**
+ * Danh sách website được phép gọi API qua trình duyệt.
+ * CLIENT_URL hỗ trợ nhiều domain, phân cách bằng dấu phẩy, ví dụ domain Vercel
+ * chính và domain preview. Các công cụ không gửi Origin (curl/Postman) vẫn dùng
+ * được để kiểm tra API; trình duyệt từ domain lạ sẽ bị chặn bởi CORS.
+ */
+const allowedOrigins = (process.env.CLIENT_URL || 'http://localhost:5173')
+  .split(',')
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+
 // Middleware
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:5173',
+  origin(origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+      return;
+    }
+    callback(new Error('Origin không được phép truy cập API.'));
+  },
   credentials: true,
 }));
 app.use(express.json({ limit: '10mb' }));
