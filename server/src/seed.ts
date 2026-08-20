@@ -26,7 +26,7 @@ async function seedDatabase(): Promise<void> {
   try {
     await Promise.all([Registration.deleteMany({}), BloodDonationEvent.deleteMany({}), User.deleteMany({})]);
 
-    const admin = await User.create({ fullName: vi('Quản trị viên Quỹ Hiến Máu DKT'), email: 'admin@example.com', password: 'Admin@123456', phone: '0901234567', dateOfBirth: new Date('1990-01-15'), gender: 'male', bloodType: 'O+', role: 'admin' });
+    const admin = await User.create({ fullName: vi('Quản trị viên Quỹ Hiến Máu DKT - Dũng Kiệt Tâm'), email: 'admin@example.com', password: 'Admin@123456', phone: '0901234567', dateOfBirth: new Date('1990-01-15'), gender: 'male', bloodType: 'O+', role: 'admin' });
     const medical = await User.create({ fullName: vi('Bác sĩ Nguyễn Văn Y'), email: 'medical@example.com', password: 'Medical@123456', phone: '0912345678', dateOfBirth: new Date('1985-05-20'), gender: 'male', bloodType: 'A+', role: 'medical_staff' });
     const medical2 = await User.create({ fullName: vi('Điều dưỡng Trần Thu Hà'), email: 'medical2@blooddonation.com', password: 'Medical@123456', phone: '0912345679', dateOfBirth: new Date('1988-08-12'), gender: 'female', bloodType: 'B+', role: 'medical_staff' });
     const donorSeed = [
@@ -43,7 +43,7 @@ async function seedDatabase(): Promise<void> {
 
     const now = new Date();
     const events = await BloodDonationEvent.create([
-      { title: vi('Đợt Hiến Máu Mùa Xuân DKT 2026'), description: vi('Đợt hiến máu nhân đạo do Quỹ Hiến Máu DKT tổ chức, trực thuộc Bệnh viện OngNoiSuaTuoi.'), imageUrl: '/event-images/event-dkt.png', location: vi('Bệnh viện OngNoiSuaTuoi'), startDate: new Date(now.getTime() - 2 * 86400000), endDate: new Date(now.getTime() + 2 * 86400000), maxParticipants: 100, status: 'open', createdBy: admin._id },
+      { title: vi('Đợt Hiến Máu Mùa Xuân DKT 2026'), description: vi('Đợt hiến máu nhân đạo do Quỹ Hiến Máu DKT - Dũng Kiệt Tâm tổ chức, trực thuộc Bệnh viện OngNoiSuaTuoi.'), imageUrl: '/event-images/event-dkt.png', location: vi('Bệnh viện OngNoiSuaTuoi'), startDate: new Date(now.getTime() - 2 * 86400000), endDate: new Date(now.getTime() + 2 * 86400000), maxParticipants: 100, status: 'open', createdBy: admin._id },
       { title: vi('Ngày Hội Hiến Máu Tình Nguyện'), description: vi('Ngày hội hưởng ứng Ngày Quốc tế Hiến máu.'), imageUrl: '/event-images/event-hospital.png', location: vi('Bệnh viện Trung ương Huế, 16 Lê Lợi, TP. Huế'), startDate: new Date(now.getTime() + 14 * 86400000), endDate: new Date(now.getTime() + 15 * 86400000), maxParticipants: 150, status: 'upcoming', createdBy: admin._id },
       { title: vi('Đợt Hiến Máu Cộng Đồng Q3/2026'), description: vi('Đợt hiến máu cộng đồng đã hoàn thành.'), imageUrl: '/event-images/event-campus.png', location: vi('Trung tâm Huyết học Truyền máu TP.HCM'), startDate: new Date(now.getTime() - 30 * 86400000), endDate: new Date(now.getTime() - 29 * 86400000), maxParticipants: 80, status: 'completed', createdBy: admin._id },
       { title: vi('Hiến Máu Cộng Đồng Hồ Tây'), description: vi('Sự kiện đã đóng, giữ lại cho mục đích báo cáo.'), imageUrl: '/event-images/event-community.png', location: vi('Trung tâm Văn hóa Tây Hồ, Hà Nội'), startDate: new Date(now.getTime() + 30 * 86400000), endDate: new Date(now.getTime() + 31 * 86400000), maxParticipants: 60, status: 'closed', createdBy: admin._id },

@@ -1,6 +1,6 @@
 # Hệ Thống Hiến Máu DKT
 
-Hệ thống do **Quỹ Hiến Máu DKT** thành lập, trực thuộc **Bệnh viện OngNoiSuaTuoi**.
+Hệ thống do **Quỹ Hiến Máu DKT — Dũng · Kiệt · Tâm** thành lập, trực thuộc **Bệnh viện OngNoiSuaTuoi**.
 
 Ứng dụng full-stack quản lý quy trình đăng ký hiến máu: đăng ký tài khoản, tạo đợt hiến, sàng lọc ban đầu, QR, điểm danh, sàng lọc y tế, thống kê và xuất báo cáo.
 
