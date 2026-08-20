@@ -1,0 +1,18 @@
+{
+  "name": "blood-donation-system",
+  "version": "1.0.0",
+  "description": "Hệ Thống Hiến Máu DKT trực thuộc Bệnh viện OngNoiSuaTuoi",
+  "private": true,
+  "scripts": {
+    "install:all": "cd server && npm install && cd ../client && npm install",
+    "dev:server": "cd server && npm run dev",
+    "dev:client": "cd client && npm run dev",
+    "start": "cd server && npm run start",
+    "start:server": "cd server && npm run start",
+    "build:server": "cd server && npm run build",
+    "build:client": "cd client && npm run build",
+    "seed": "cd server && npm run seed"
+  },
+  "keywords": ["blood-donation", "healthcare", "management-system"],
+  "license": "ISC"
+}
