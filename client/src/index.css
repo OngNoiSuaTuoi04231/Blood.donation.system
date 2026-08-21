@@ -301,7 +301,8 @@ table tbody tr:hover { background: #fffafb; }
 .dark .auth-return-link { color: #cbd5e1; }
 .dark .auth-return-link:hover { color: #fda4af; }
 
-@media (max-width: 700px) {
+/* Một số trình duyệt điện thoại báo viewport CSS lớn hơn 700px; dùng ngưỡng này để luôn tránh sidebar desktop chiếm nửa màn hình. */
+@media (max-width: 1024px) {
   header > div { min-height: auto; padding-top: .7rem; padding-bottom: .7rem; align-items: flex-start; flex-wrap: wrap; }
   .brand-link { max-width: calc(100% - 7rem); }
   .fund-brand-header strong { font-size: .82rem; }
