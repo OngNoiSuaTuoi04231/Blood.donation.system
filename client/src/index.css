@@ -356,22 +356,36 @@ table tbody tr:hover { background: #fffafb; }
   .auth-panel { padding: 1.5rem 1rem 2.5rem; }
 }
 
-/* Theo yêu cầu nhận diện đồng nhất: điện thoại giữ nguyên sidebar, hero và các khối như giao diện PC. */
+/* Mobile: giữ nguyên ngôn ngữ thiết kế desktop, menu mở từ trái thay vì ép sidebar chiếm chiều ngang. */
+/* Nút menu chỉ xuất hiện ở màn hình nhỏ; desktop vẫn dùng sidebar cố định. */
+.mobile-menu-trigger, .mobile-menu-close { display: none; }
+
 @media (max-width: 1024px) {
-  header > div, .app-workspace, .site-footer > div, .auth-layout { min-width: 76rem; }
-  header > div { flex-wrap: nowrap; }
-  .app-sidebar { width: 17.5rem; min-width: 17.5rem; flex: 0 0 17.5rem; padding: 1rem .75rem; border-right: 1px solid #e2e8f0; border-bottom: 0; }
-  .sidebar-heading { display: block; }
-  .sidebar-group-button { justify-content: space-between; min-height: 0; padding: .7rem; border-radius: .75rem; }
-  .sidebar-group-button > span { display: inline-flex; align-items: center; justify-content:flex-start; gap: .55rem; font-size: .82rem; }
-  .sidebar-group-button > span svg { width: 1rem; height: 1rem; }
-  .sidebar-group-button > svg { display: block; }
-  .sidebar-items { gap: .18rem; margin: .15rem 0 .35rem .65rem; padding: .0rem 0 .0rem .75rem; border-left: 1px solid #fecdd3; }
-  .sidebar-item { justify-content: flex-start; min-height: 0; padding: .6rem .7rem; border-radius: .65rem; }
-  .sidebar-item > span { display: inline; }
-  .sidebar-item svg { width: 1rem; height: 1rem; }
+  .mobile-menu-trigger { display: inline-flex; align-items: center; justify-content: center; width: 2.5rem; height: 2.5rem; flex: 0 0 auto; border: 1px solid #fecdd3; border-radius: .75rem; color: #be123c; background: #fff7f7; }
+  header > div { gap: .55rem; padding: .7rem 1rem; flex-wrap: wrap; }
+  .brand-link { max-width: calc(100% - 7rem); }
+  .header-vital-line { order: 3; flex-basis: 100%; height: 1.4rem; }
+  .app-workspace { display: block; }
+  .app-sidebar { position: fixed; inset: 0 auto 0 0; z-index: 70; width: min(18rem, 84vw); min-width: 0; height: 100dvh; padding: 1rem .75rem 2rem; overflow-y: auto; border: 0; box-shadow: 24px 0 60px rgba(2,6,23,.32); transform: translateX(-105%); transition: transform .28s ease; }
+  .app-sidebar.mobile-open { transform: translateX(0); }
+  .mobile-menu-close { display: inline-flex; position: absolute; top: .8rem; right: .75rem; align-items: center; justify-content: center; width: 2.2rem; height: 2.2rem; border: 1px solid #fecdd3; border-radius: .65rem; color: #be123c; background: #fff7f7; }
+  .sidebar-heading { display: block; padding-right: 2.8rem; }
+  .mobile-menu-backdrop { position: fixed; inset: 0; z-index: 60; border: 0; background: rgba(2,6,23,.58); backdrop-filter: blur(2px); }
   .app-main { min-width: 0; }
+  .hero-card { grid-template-columns: 1fr; min-height: 0; }
+  .hero-copy { padding: 2rem 1.5rem; }
+  .hero-card > img { min-height: 17rem; max-height: 22rem; }
+  .auth-layout { grid-template-columns: 1fr; }
+  .auth-showcase { min-height: 22rem; }
+  .auth-showcase-content { padding: 2.25rem 1.5rem; }
+  .auth-showcase h1 { margin-top: 1.25rem; font-size: 2.25rem; }
+  .auth-showcase-content > p { max-width: 28rem; font-size: .92rem; }
+  .auth-benefits { margin-top: 1.2rem; gap: .45rem; }
+  .auth-benefits span { font-size: .7rem; }
+  .auth-showcase > img { height: 100%; opacity: .34; mix-blend-mode: normal; }
+  .auth-panel { padding: 1.5rem 1rem 2.5rem; }
 }
+.dark .mobile-menu-trigger, .dark .mobile-menu-close { border-color: #5f2335; color: #fecdd3; background: #1e293b; }
 
 @media (prefers-reduced-motion: reduce) {
   .auth-showcase::before, .auth-showcase::after, .auth-showcase > img, .auth-form-card, .pulse-orb, .vital-line-glow, .vital-heart, .dark .page-decoration::after { animation: none; }
