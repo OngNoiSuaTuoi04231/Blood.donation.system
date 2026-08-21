@@ -163,6 +163,7 @@ table tbody tr:hover { background: #fffafb; }
 .hero-copy { position: relative; z-index: 1; align-self: center; padding: clamp(2rem, 5vw, 4.2rem); }
 .hero-kicker { display: inline-flex; align-items: center; gap: .45rem; color: #be123c; font-size: .75rem; line-height: 1.2; font-weight: 750; letter-spacing: .055em; text-transform: uppercase; }
 .fund-brand { display: inline-flex; flex-direction: column; gap: .18rem; line-height: 1.1; letter-spacing: normal; text-transform: none; }
+.brand-link > svg { flex: 0 0 auto; color: #f43f5e; stroke-width: 2.35; filter: drop-shadow(0 0 7px rgba(244, 63, 94, .25)); }
 .fund-brand strong { color: inherit; font-size: 1rem; font-weight: 900; letter-spacing: .045em; }
 .fund-brand > span { display: inline-block; width: fit-content; padding: .16rem .45rem; border-left: 3px solid currentColor; border-radius: 0 .3rem .3rem 0; font-size: .7rem; font-weight: 800; line-height: 1.25; letter-spacing: .015em; }
 .fund-brand-header { color: #b91c1c; }
