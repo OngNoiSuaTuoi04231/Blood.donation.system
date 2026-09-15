@@ -777,7 +777,7 @@ header { border-color: var(--dkt-border); background: rgba(255, 255, 255, .94) !
 .camera-toggle:disabled { cursor: not-allowed; opacity: .48; box-shadow: none; transform: none; }
 .camera-shell { position: relative; width: min(100%, 28rem); aspect-ratio: 1; margin: 1rem auto 0; overflow: hidden; border: 1px solid var(--dkt-border); border-radius: 1.15rem; background: #161b19; box-shadow: inset 0 0 0 1px rgba(255,255,255,.04); }
 .camera-shell #qr-reader { position: absolute; inset: 0; width: 100%; height: 100%; border: 0 !important; border-radius: 0; background: #161b19; }
-.camera-shell #qr-reader video { width: 100% !important; height: 100% !important; max-width: none; object-fit: cover; }
+.camera-shell #qr-reader video { width: 100% !important; height: 100% !important; max-width: none; object-fit: cover; transform: scaleX(-1); }
 .camera-shell #qr-reader canvas { width: 100% !important; height: 100% !important; object-fit: cover; }
 .camera-guide { display: none; position: absolute; z-index: 3; inset: 13%; pointer-events: none; }
 .camera-active .camera-guide { display: block; }
