@@ -42,6 +42,9 @@ VITE_API_URL=https://<ten-dich-vu>.onrender.com/api
 ## 3. MongoDB Atlas
 
 - Giữ database `blood_donation_system` hiện có.
+- Đặt backend Render và MongoDB Atlas gần nhau để giảm độ trễ. Blueprint mới dùng `region: singapore`; trong Atlas nên chọn AWS Singapore (`ap-southeast-1`) hoặc vùng Singapore tương ứng của nhà cung cấp đang dùng.
+- Render không cho đổi region của service đã tạo. Nếu service hiện tại không ở Singapore, tạo Web Service mới tại Singapore, chép lại các biến Environment, cập nhật `VITE_API_URL` trên Vercel rồi mới xóa service cũ.
+- Atlas Free không hỗ trợ chuyển region trực tiếp. Với cluster miễn phí đang ở xa, tạo cluster mới tại Singapore, chuyển dữ liệu sang cluster mới, sau đó cập nhật `MONGO_URI` trên Render. Luôn sao lưu trước khi chuyển dữ liệu.
 - Tạo user database quyền tối thiểu cần thiết cho ứng dụng.
 - Cấu hình Network Access theo yêu cầu của Atlas/Render để Render được phép kết nối database.
 - Không chạy lệnh seed trên môi trường production vì seed xóa dữ liệu demo hiện hữu.

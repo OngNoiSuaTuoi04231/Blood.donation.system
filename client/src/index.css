@@ -263,6 +263,15 @@ table tbody tr:hover { background: #fffafb; }
 .auth-title-icon { display: inline-flex; align-items: center; justify-content: center; width: 3.2rem; height: 3.2rem; margin-bottom: .8rem; border-radius: 1rem; color: #dc2626; background: #fff1f2; box-shadow: inset 0 0 0 1px #fecdd3; }
 .auth-title h2 { margin-top: .48rem; color: #172554; font-size: 1.55rem; font-weight: 800; letter-spacing: -.025em; }
 .auth-title > p:last-child { margin-top: .55rem; color: #64748b; font-size: .9rem; line-height: 1.55; }
+.server-status { display: flex; align-items: flex-start; gap: .65rem; margin: -0.55rem 0 1.2rem; padding: .72rem .8rem; border: 1px solid #fed7aa; border-radius: .8rem; color: #9a5b12; background: #fff8ec; }
+.server-status > svg { flex: 0 0 auto; margin-top: .08rem; }
+.server-status div { display: grid; gap: .12rem; }
+.server-status strong { font-size: .78rem; line-height: 1.35; }
+.server-status span { color: #8b6b43; font-size: .7rem; line-height: 1.4; }
+.server-status-ready { color: #18724d; border-color: #b9e5d1; background: #f0faf5; }
+.server-status-ready span { color: #517263; }
+.server-status-unavailable { color: #a12933; border-color: #f2c3c7; background: #fff3f4; }
+.server-status-unavailable span { color: #835b5f; }
 .auth-form { position: relative; }
 .auth-submit { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 3rem; }
 .auth-guideline-link { display: flex; align-items: center; justify-content: center; gap: .45rem; margin-top: 1.15rem; padding-top: 1rem; border-top: 1px solid #fee2e2; color: #be123c; font-size: .84rem; font-weight: 700; }
@@ -642,6 +651,12 @@ header { border-color: var(--dkt-border); background: rgba(255, 255, 255, .94) !
 .dark .auth-title > p:first-of-type { color: #ff7b84 !important; }
 .dark .auth-title > p:last-child,
 .dark .auth-form small { color: #bfc7c2; }
+.dark .server-status { color: #f2ca78; border-color: #6e5b35; background: #373326; }
+.dark .server-status span { color: #d3c49e; }
+.dark .server-status-ready { color: #8fe0b9; border-color: #3b6853; background: #263a31; }
+.dark .server-status-ready span { color: #acd1bf; }
+.dark .server-status-unavailable { color: #ff9ea5; border-color: #74464b; background: #3e292c; }
+.dark .server-status-unavailable span { color: #d6b2b5; }
 .dark .auth-form label { color: #f4f6f3; }
 .dark .auth-form .btn-primary { color: #fff; background: #d64550; box-shadow: 0 12px 24px -16px rgba(214, 69, 80, .9); }
 .dark .auth-form .btn-primary:hover { background: #bb303c; }

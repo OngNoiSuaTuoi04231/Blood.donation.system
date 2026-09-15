@@ -44,6 +44,14 @@ export interface AuthResponse {
 }
 
 const authService = {
+  // Gọi ngay khi trang đăng nhập mở để đánh thức Render Free trong lúc người dùng nhập thông tin.
+  wakeServer: async () => {
+    const res = await api.get<{ success: boolean; data: { status: string; timestamp: string } }>('/health', {
+      timeout: 75_000,
+    });
+    return res.data;
+  },
+
   login: async (data: LoginData) => {
     const res = await api.post<AuthResponse>('/auth/login', data);
     return res.data;
