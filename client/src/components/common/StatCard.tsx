@@ -5,7 +5,7 @@ interface StatCardProps {
   icon: LucideIcon;
   title: string;
   value: string | number;
-  color?: 'red' | 'blue' | 'green' | 'yellow' | 'purple' | 'slate';
+  color?: 'red' | 'blue' | 'green' | 'yellow' | 'teal' | 'slate';
   subtitle?: string;
   trend?: {
     value: number;
@@ -34,10 +34,10 @@ const colorClasses = {
     icon: 'text-yellow-600',
     border: 'border-yellow-200',
   },
-  purple: {
-    bg: 'bg-purple-50',
-    icon: 'text-purple-600',
-    border: 'border-purple-200',
+  teal: {
+    bg: 'bg-teal-50',
+    icon: 'text-teal-700',
+    border: 'border-teal-200',
   },
   slate: {
     bg: 'bg-slate-50',
