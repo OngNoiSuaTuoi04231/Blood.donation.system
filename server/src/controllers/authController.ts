@@ -195,3 +195,49 @@ export const getMe = async (req: AuthRequest, res: Response): Promise<void> => {
     sendError(res, error.message || 'Failed to get user', 500);
   }
 };
+
+/**
+ * PUT /api/auth/me
+ * Cập nhật các thông tin cá nhân an toàn. Email, mật khẩu và role không được đổi tại đây.
+ */
+export const updateMe = async (req: AuthRequest, res: Response): Promise<void> => {
+  try {
+    const user = await User.findById(req.user!._id);
+    if (!user) {
+      sendError(res, 'User not found', 404);
+      return;
+    }
+
+    const { fullName, phone, dateOfBirth, gender, bloodType } = req.body;
+    if (!fullName || !phone || !dateOfBirth || !gender || !bloodType) {
+      sendError(res, 'Vui lòng nhập đầy đủ thông tin cá nhân.', 400);
+      return;
+    }
+    if (user.role === 'donor' && exceedsDonationAgeLimit(dateOfBirth)) {
+      sendError(res, 'Người hiến phải từ đủ 18 đến 60 tuổi.', 400);
+      return;
+    }
+
+    user.fullName = String(fullName).trim();
+    user.phone = String(phone).trim();
+    user.dateOfBirth = new Date(dateOfBirth);
+    user.gender = gender;
+    user.bloodType = bloodType;
+    await user.save();
+
+    sendSuccess(res, {
+      _id: user._id,
+      fullName: user.fullName,
+      email: user.email,
+      phone: user.phone,
+      dateOfBirth: user.dateOfBirth,
+      gender: user.gender,
+      bloodType: user.bloodType,
+      role: user.role,
+      isActive: user.isActive,
+      createdAt: user.createdAt,
+    });
+  } catch (error: any) {
+    sendError(res, error.message || 'Không thể cập nhật thông tin cá nhân.', 500);
+  }
+};

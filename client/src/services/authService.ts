@@ -64,6 +64,11 @@ const authService = {
     const res = await api.get<{ success: boolean; data: User }>('/auth/me');
     return res.data;
   },
+
+  updateMe: async (data: Pick<RegisterData, 'fullName' | 'phone' | 'dateOfBirth' | 'gender' | 'bloodType'>) => {
+    const res = await api.put<{ success: boolean; data: User }>('/auth/me', data);
+    return res.data;
+  },
 };
 
 export default authService;
