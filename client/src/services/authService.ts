@@ -17,8 +17,8 @@ export interface RegisterData {
 
 export interface ResetPasswordData {
   email: string;
-  fullName: string;
-  dateOfBirth: string;
+  fullName?: string;
+  dateOfBirth?: string;
   newPassword: string;
 }
 
@@ -62,7 +62,15 @@ const authService = {
     return res.data;
   },
 
-  // Bản demo xác minh bằng email + họ tên + ngày sinh, không gửi email vì dùng email giả.
+  checkEmail: async (email: string) => {
+    const res = await api.post<{ success: boolean; data: { exists: boolean; fullName: string; email: string } }>(
+      '/auth/check-email',
+      { email }
+    );
+    return res.data;
+  },
+
+  // Hỗ trợ đổi mật khẩu qua luồng OTP EmailJS hoặc xác minh ngày sinh
   resetPassword: async (data: ResetPasswordData) => {
     const res = await api.post<{ success: boolean; data: { message: string } }>('/auth/reset-password', data);
     return res.data;

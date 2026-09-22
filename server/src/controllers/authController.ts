@@ -129,16 +129,46 @@ export const login = async (req: Request, res: Response): Promise<void> => {
 };
 
 /**
+ * POST /api/auth/check-email
+ * Kiểm tra xem email có tồn tại trong hệ thống hay không trước khi gửi mã OTP qua EmailJS
+ */
+export const checkEmail = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { email } = req.body;
+    if (!email || !String(email).trim()) {
+      sendError(res, 'Vui lòng nhập địa chỉ email hợp lệ.', 400);
+      return;
+    }
+
+    const cleanEmail = String(email).toLowerCase().trim();
+    const user = await User.findOne({ email: cleanEmail });
+    if (!user) {
+      sendError(res, 'Không tìm thấy tài khoản nào khớp với email này trong hệ thống.', 404);
+      return;
+    }
+
+    sendSuccess(res, {
+      exists: true,
+      fullName: user.fullName,
+      email: user.email,
+    });
+  } catch (error: any) {
+    sendError(res, error.message || 'Lỗi khi kiểm tra email.', 500);
+  }
+};
+
+/**
  * POST /api/auth/reset-password
- * Luồng khôi phục dành cho bản demo/local: không gửi email vì dự án dùng email giả.
- * Người dùng phải xác minh đồng thời email, họ tên và ngày sinh trước khi được đổi mật khẩu.
- * Khi triển khai thực tế, endpoint này nên được thay bằng token một lần gửi qua email/SMS.
+ * Đặt lại mật khẩu mới cho tài khoản.
+ * Hỗ trợ cả 2 luồng:
+ * 1. Luồng OTP EmailJS: gửi email + newPassword (đã xác thực mã OTP trước đó)
+ * 2. Luồng demo cũ: gửi email + fullName + dateOfBirth + newPassword
  */
 export const resetPassword = async (req: Request, res: Response): Promise<void> => {
   try {
     const { email, fullName, dateOfBirth, newPassword } = req.body;
-    if (!email || !fullName || !dateOfBirth || !newPassword) {
-      sendError(res, 'Vui lòng nhập đầy đủ email, họ tên, ngày sinh và mật khẩu mới.', 400);
+    if (!email || !newPassword) {
+      sendError(res, 'Vui lòng cung cấp email và mật khẩu mới.', 400);
       return;
     }
     if (String(newPassword).length < 6) {
@@ -146,21 +176,32 @@ export const resetPassword = async (req: Request, res: Response): Promise<void> 
       return;
     }
 
-    // So sánh ngày theo phần năm-tháng-ngày để không bị lệch múi giờ khi MongoDB lưu Date UTC.
-    const user = await User.findOne({ email: String(email).toLowerCase().trim() });
-    const submittedDate = new Date(dateOfBirth);
-    if (!user || Number.isNaN(submittedDate.getTime())) {
-      sendError(res, 'Thông tin xác minh không đúng.', 400);
-      return;
-    }
-    const storedDate = user.dateOfBirth.toISOString().slice(0, 10);
-    const requestedDate = submittedDate.toISOString().slice(0, 10);
-    if (user.fullName.trim().toLocaleLowerCase('vi-VN') !== String(fullName).trim().toLocaleLowerCase('vi-VN') || storedDate !== requestedDate) {
-      sendError(res, 'Thông tin xác minh không đúng.', 400);
+    const cleanEmail = String(email).toLowerCase().trim();
+    const user = await User.findOne({ email: cleanEmail });
+    if (!user) {
+      sendError(res, 'Không tìm thấy tài khoản tương ứng với email này.', 404);
       return;
     }
 
-    // Model User tự bcrypt hash vì password đã được gán mới và được đánh dấu modified.
+    // Nếu người dùng gửi kèm cả họ tên và ngày sinh (xác thực bổ sung)
+    if (fullName && dateOfBirth) {
+      const submittedDate = new Date(dateOfBirth);
+      if (Number.isNaN(submittedDate.getTime())) {
+        sendError(res, 'Thông tin ngày sinh không hợp lệ.', 400);
+        return;
+      }
+      const storedDate = user.dateOfBirth.toISOString().slice(0, 10);
+      const requestedDate = submittedDate.toISOString().slice(0, 10);
+      if (
+        user.fullName.trim().toLocaleLowerCase('vi-VN') !== String(fullName).trim().toLocaleLowerCase('vi-VN') ||
+        storedDate !== requestedDate
+      ) {
+        sendError(res, 'Thông tin xác minh không đúng.', 400);
+        return;
+      }
+    }
+
+    // Model User tự động bcrypt hash vì password được gán mới
     user.password = newPassword;
     await user.save();
     sendSuccess(res, { message: 'Đổi mật khẩu thành công. Bạn có thể đăng nhập bằng mật khẩu mới.' });
